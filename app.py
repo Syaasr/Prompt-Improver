@@ -135,15 +135,17 @@ st.markdown(f"""
     }}
     /* In mini mode, center buttons and avatars */
     section[data-testid="stSidebar"][aria-expanded="false"] .stButton > button {{
-        padding: 0.4rem !important;
-        width: 100% !important;
-        font-size: 1.1rem !important;
-        text-align: center !important;
+        width: 42px !important;
+        height: 42px !important;
+        padding: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-start !important;
+        padding-left: 11px !important;
         overflow: hidden !important;
         white-space: nowrap !important;
-        text-overflow: clip !important;
-        display: flex !important;
-        justify-content: center !important;
+        border-radius: 8px !important;
+        margin: 0 auto !important;
     }}
     /* Hack to show only icon in mini buckets if possible, or just first char */
     /* Because Streamlit buttons are one text node, we rely on the icon being first */
@@ -543,10 +545,6 @@ if should_show_login_screen():
             f'<span>{t("login_google_desc")}</span>'
             f'</div>'
             f'<div class="login-feature">'
-            f'<div class="login-feature-icon">🎯</div>'
-            f'<span>{t("login_guest_desc")}</span>'
-            f'</div>'
-            f'<div class="login-feature">'
             f'<div class="login-feature-icon">⚡</div>'
             f'<span>{t("login_guest_desc")}</span>'
             f'</div>'
@@ -617,16 +615,16 @@ with st.sidebar:
 
     # Theme toggle
     theme_icon = "☀️" if is_dark else "🌙"
-    theme_text = "Light Mode" if is_dark else "Dark Mode"
+    theme_text = "    Light Mode" if is_dark else "    Dark Mode"
     if st.button(f"{theme_icon} {theme_text}", use_container_width=True, key="sb_theme"):
         st.session_state.theme = "dark" if st.session_state.theme == "light" else "light"
         st.rerun()
 
     # Language toggle
     if current_lang == "en":
-        flag_btn = "🇮🇩 Bahasa Indonesia"
+        flag_btn = "🇮🇩   Bahasa Indonesia"
     else:
-        flag_btn = "🇺🇸 English"
+        flag_btn = "🇺🇸   English"
 
     if st.button(flag_btn, use_container_width=True, key="sb_lang_toggle"):
         new_lang = "id" if current_lang == "en" else "en"
@@ -639,11 +637,11 @@ with st.sidebar:
     st.markdown(f'<p class="sb-section">📋 {t("sidebar_templates")}</p>', unsafe_allow_html=True)
 
     templates = {
-        "📝  Blog Post": "Write a blog post about...",
-        "💻  Code Review": "Review this code and suggest improvements...",
-        "📧  Email Draft": "Write a professional email to...",
-        "🎯  Marketing": "Create compelling marketing copy for...",
-        "📊  Data Analysis": "Analyze the following data and provide insights...",
+        "📝    Blog Post": "Write a blog post about...",
+        "💻    Code Review": "Review this code and suggest improvements...",
+        "📧    Email Draft": "Write a professional email to...",
+        "🎯    Marketing": "Create compelling marketing copy for...",
+        "📊    Data Analysis": "Analyze the following data and provide insights...",
     }
     for label, tpl in templates.items():
         if st.button(label, use_container_width=True, key=f"tpl_{label}"):
@@ -679,31 +677,17 @@ with st.sidebar:
     # Google Sign-in button
     if is_anon:
         st.markdown("")
-        if _auth_available():
-            if st.button(
-                f"🔑 {t('sidebar_login_button')}",
-                use_container_width=True,
-                key="sb_google_login",
-                type="primary",
-            ):
+        # Always show button
+        if st.button(
+            f"🔑 {t('sidebar_login_button')}",
+            use_container_width=True,
+            key="sb_google_login",
+            type="primary",
+        ):
+            if _auth_available():
                 st.login("google")
-        else:
-            # Fallback if no auth secrets config
-            st.markdown(
-                f'<div class="sb-login-info">'
-                f'<p style="font-size:0.7rem;color:var(--text-muted);'
-                f'text-align:center;margin-top:0.25rem;">'
-                f'{t("sidebar_login_prompt")}</p>'
-                f'</div>',
-                unsafe_allow_html=True,
-            )
-            # Add a 'fake' button for UI demo if secrets missing? 
-            # User asked for the button to "appear and work". 
-            # If it doesn't work (no secrets), we can't make it work.
-            # But we can make it APPEAR.
-            # Let's show a disabled button or a button that shows a toast if no secrets.
-            # For now, sticking to logic: if no secrets, show text.
-            pass
+            else:
+                st.warning("Google login not configured (secrets.toml missing)")
     else:
         # Show logout button for signed-in users
         st.markdown("")

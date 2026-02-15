@@ -39,9 +39,6 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
-# ── Inject Design System ─────────────────────────────────────────────
-inject_custom_css()
-
 # ── Session State ───────────────────────────────────────────────────
 def init_state():
     defaults = {
@@ -58,6 +55,9 @@ def init_state():
             st.session_state[k] = v
 
 init_state()
+
+# ── Inject Design System (dark theme only) ────────────────────────
+inject_custom_css(theme="dark")
 
 # ── Login Logic (DISABLED) ──────────────────────────────────────────
 if should_show_login_screen():
@@ -87,35 +87,58 @@ with open(_templates_file, "r", encoding="utf-8") as f:
 
 # ── Sidebar ─────────────────────────────────────────────────────────
 with st.sidebar:
-    # Build menu items for templates from data/templates.json
-    template_menu_items = [
-        sac.MenuItem(name, icon='file-text') for name in _sidebar_templates.keys()
-    ]
+    # ── Settings: Language Selection ───────────────────────────────
+    st.markdown(f"<div class='settings-header'>{t('settings_title')}</div>", unsafe_allow_html=True)
 
     current_lang = get_language()
-    lang_label = f"Bahasa: {'EN' if current_lang == 'en' else 'ID'}"
+    
+    # Language options using flag emojis
+    lang_labels = {"en": "🇬🇧 English", "id": "🇮🇩 Indonesia"}
+    
+    # Get current selection label
+    default_label = lang_labels.get(current_lang, "🇬🇧 English")
+    
+    selected_label = st.segmented_control(
+        label=t("settings_language"),
+        options=list(lang_labels.values()),
+        default=default_label,
+        selection_mode="single",
+        label_visibility="collapsed",
+        key="lang_select"
+    )
+
+    if selected_label:
+        # Find code from label
+        new_lang = next((k for k, v in lang_labels.items() if v == selected_label), current_lang)
+        if new_lang != current_lang:
+            set_language(new_lang)
+            st.rerun()
+
+    st.markdown("<hr class='sidebar-divider'>", unsafe_allow_html=True)
+
+    # ── Templates with icons (bilingual) ────────────────────────────
+    lang = get_language()
+    template_menu_items = []
+    for name, data in _sidebar_templates.items():
+        icon = data.get("icon", "file-text")
+        template_menu_items.append(sac.MenuItem(name, icon=icon))
 
     selected_item = sac.menu([
         sac.MenuItem('Refine', icon='stars', description=t('app_subtitle')),
         sac.MenuItem(t('sidebar_templates'), icon='card-text', children=template_menu_items),
-        sac.MenuItem('Settings', icon='gear', children=[
-            sac.MenuItem(lang_label, icon='translate'),
-        ]),
     ], size='lg', color='yellow', open_all=True)
 
     # Handle Sidebar Actions
     if selected_item and selected_item in _sidebar_templates:
         if st.session_state.get("last_selected_template") != selected_item:
-            st.session_state.raw_prompt = _sidebar_templates[selected_item]
-            # Force update of text_area widget by updating its key in session_state
-            st.session_state.input_prompt = _sidebar_templates[selected_item]
+            # Load template in current language
+            template_data = _sidebar_templates[selected_item]
+            template_text = template_data.get(lang, template_data.get("en", ""))
+            st.session_state.raw_prompt = template_text
+            st.session_state.input_prompt = template_text
             st.session_state.step = "input"
             st.session_state.last_selected_template = selected_item
             st.rerun()
-    elif selected_item and selected_item.startswith('Bahasa'):
-        new_lang = 'id' if current_lang == 'en' else 'en'
-        set_language(new_lang)
-        st.rerun()
 
 
 # ── Main Content Layout ─────────────────────────────────────────────
@@ -126,7 +149,7 @@ with main_col:
     st.markdown("<h2 style='margin-bottom: 0.5rem;'>Prompt <span style='color:#FACC15'>Refiner</span></h2>", unsafe_allow_html=True)
     st.markdown("<div style='margin-bottom: 0.75rem; color: #64748B;'>✦ Unlimited prompts — no login required.</div>", unsafe_allow_html=True)
 
-    # Options Row: Model | Output Format | Questions
+    # Options Row: Model | Output Format | Question Type
     col_model, col_template, col_questions = st.columns(3)
     with col_model:
         selected_model = st.selectbox(
@@ -186,7 +209,7 @@ with main_col:
 
     # ━━ STEP 2: QUESTIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     elif st.session_state.step == "questions":
-        st.markdown(f"<div style='padding:1rem; border:1px solid #334155; border-radius:0.5rem; margin-bottom:2rem; background:#1E293B; color:#94A3B8;'><em>{st.session_state.raw_prompt}</em></div>", unsafe_allow_html=True)
+        st.markdown(f"<div style='padding:1rem; border:1px solid var(--border-color); border-radius:0.5rem; margin-bottom:2rem; background:var(--bg-surface); color:var(--text-secondary);'><em>{st.session_state.raw_prompt}</em></div>", unsafe_allow_html=True)
         
         with st.form("questions_form"):
             st.markdown(f"### {t('step2_title')}")

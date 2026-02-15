@@ -1,0 +1,19 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.7, pytest-9.0.2, pluggy-1.6.0 -- D:\Coding\Website\Prompt-Improver\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Coding\Website\Prompt-Improver
+plugins: anyio-4.12.1
+collecting ... collected 10 items
+
+tests/test_ai_engine.py::TestAnalyzePrompt::test_returns_questions PASSED [ 10%]
+tests/test_ai_engine.py::TestAnalyzePrompt::test_handles_markdown_fences PASSED [ 20%]
+tests/test_ai_engine.py::TestAnalyzePrompt::test_rejects_invalid_json PASSED [ 30%]
+tests/test_ai_engine.py::TestAnalyzePrompt::test_rejects_missing_questions_key PASSED [ 40%]
+tests/test_ai_engine.py::TestAnalyzePrompt::test_accepts_question_type PASSED [ 50%]
+tests/test_ai_engine.py::TestAnalyzePrompt::test_validates_input PASSED  [ 60%]
+tests/test_ai_engine.py::TestAnalyzePrompt::test_rejects_injection PASSED [ 70%]
+tests/test_ai_engine.py::TestRefinePrompt::test_returns_refined_text PASSED [ 80%]
+tests/test_ai_engine.py::TestRefinePrompt::test_passes_answers_in_message PASSED [ 90%]
+tests/test_ai_engine.py::TestRefinePrompt::test_rejects_empty_response PASSED [100%]
+
+============================= 10 passed in 0.23s ==============================

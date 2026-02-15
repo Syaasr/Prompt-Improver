@@ -59,7 +59,13 @@
 
     "step_label_write": "Write",
     "step_label_clarify": "Clarify",
-    "step_label_result": "Result"
+    "step_label_result": "Result",
+
+    "settings_title": "Settings",
+    "settings_theme": "Theme",
+    "settings_language": "Language",
+    "theme_dark": "Dark",
+    "theme_light": "Light"
   },
   "id": {
     "app_title": "AI Prompt Refiner",
@@ -121,6 +127,12 @@
 
     "step_label_write": "Tulis",
     "step_label_clarify": "Klarifikasi",
-    "step_label_result": "Hasil"
+    "step_label_result": "Hasil",
+
+    "settings_title": "Pengaturan",
+    "settings_theme": "Tema",
+    "settings_language": "Bahasa",
+    "theme_dark": "Gelap",
+    "theme_light": "Terang"
   }
 }

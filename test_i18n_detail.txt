@@ -1,0 +1,55 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.7, pytest-9.0.2, pluggy-1.6.0 -- D:\Coding\Website\Prompt-Improver\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Coding\Website\Prompt-Improver
+plugins: anyio-4.12.1
+collecting ... collected 11 items
+
+tests/test_i18n.py::TestTranslationData::test_has_en_and_id PASSED       [  9%]
+tests/test_i18n.py::TestTranslationData::test_keys_match PASSED          [ 18%]
+tests/test_i18n.py::TestTranslationData::test_no_empty_values PASSED     [ 27%]
+tests/test_i18n.py::TestTranslationData::test_minimum_key_count PASSED   [ 36%]
+tests/test_i18n.py::TestI18nModule::test_get_language_default FAILED     [ 45%]
+tests/test_i18n.py::TestI18nModule::test_set_language PASSED             [ 54%]
+tests/test_i18n.py::TestI18nModule::test_set_invalid_language FAILED     [ 63%]
+tests/test_i18n.py::TestI18nModule::test_translate_en PASSED             [ 72%]
+tests/test_i18n.py::TestI18nModule::test_translate_id PASSED             [ 81%]
+tests/test_i18n.py::TestI18nModule::test_fallback_to_en PASSED           [ 90%]
+tests/test_i18n.py::TestI18nModule::test_supported_languages PASSED      [100%]
+
+================================== FAILURES ===================================
+__________________ TestI18nModule.test_get_language_default ___________________
+
+self = <tests.test_i18n.TestI18nModule object at 0x0000027B8929B750>
+mock_streamlit = (<MagicMock name='st' id='2729605978768'>, {})
+
+    def test_get_language_default(self, mock_streamlit):
+        from utils.i18n import get_language
+>       assert get_language() == "en"
+E       AssertionError: assert 'id' == 'en'
+E         
+E         - en
+E         + id
+
+tests\test_i18n.py:82: AssertionError
+__________________ TestI18nModule.test_set_invalid_language ___________________
+
+self = <tests.test_i18n.TestI18nModule object at 0x0000027B8928F490>
+mock_streamlit = (<MagicMock name='st' id='2729617818016'>, {})
+
+    def test_set_invalid_language(self, mock_streamlit):
+        _, mock_state = mock_streamlit
+        from utils.i18n import get_language, set_language
+        set_language("fr")  # Not supported
+>       assert get_language() == "en"  # Should stay default
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 'id' == 'en'
+E         
+E         - en
+E         + id
+
+tests\test_i18n.py:94: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_i18n.py::TestI18nModule::test_get_language_default - Assert...
+FAILED tests/test_i18n.py::TestI18nModule::test_set_invalid_language - Assert...
+========================= 2 failed, 9 passed in 0.44s =========================

@@ -1,20 +1,26 @@
-..............F.F..........FF.FF..F..............................        [100%]
+============================= test session starts =============================
+platform win32 -- Python 3.13.7, pytest-9.0.2, pluggy-1.6.0 -- D:\Coding\Website\Prompt-Improver\venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: D:\Coding\Website\Prompt-Improver
+plugins: anyio-4.12.1
+collecting ... collected 14 items
+
+tests/test_rate_limiter.py::TestConstants::test_logged_in_limit PASSED   [  7%]
+tests/test_rate_limiter.py::TestConstants::test_anonymous_limit PASSED   [ 14%]
+tests/test_rate_limiter.py::TestGetDailyLimit::test_anonymous PASSED     [ 21%]
+tests/test_rate_limiter.py::TestGetDailyLimit::test_logged_in PASSED     [ 28%]
+tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_fresh_user_allowed PASSED [ 35%]
+tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_allows_up_to_limit PASSED [ 42%]
+tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_blocks_after_limit FAILED [ 50%]
+tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_remaining_prompts FAILED [ 57%]
+tests/test_rate_limiter.py::TestAnonymousRateLimiting::test_fresh_anonymous_allowed PASSED [ 64%]
+tests/test_rate_limiter.py::TestAnonymousRateLimiting::test_blocks_after_one FAILED [ 71%]
+tests/test_rate_limiter.py::TestAnonymousRateLimiting::test_remaining_prompts_anonymous FAILED [ 78%]
+tests/test_rate_limiter.py::TestPersistence::test_save_and_load PASSED   [ 85%]
+tests/test_rate_limiter.py::TestPersistence::test_load_missing_file PASSED [ 92%]
+tests/test_rate_limiter.py::TestMultipleUsers::test_independent_limits FAILED [100%]
+
 ================================== FAILURES ===================================
-__________________ TestI18nModule.test_get_language_default ___________________
-tests\test_i18n.py:82: in test_get_language_default
-    assert get_language() == "en"
-E   AssertionError: assert 'id' == 'en'
-E     
-E     - en
-E     + id
-__________________ TestI18nModule.test_set_invalid_language ___________________
-tests\test_i18n.py:94: in test_set_invalid_language
-    assert get_language() == "en"  # Should stay default
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-E   AssertionError: assert 'id' == 'en'
-E     
-E     - en
-E     + id
 ______________ TestLoggedInRateLimiting.test_blocks_after_limit _______________
 tests\test_rate_limiter.py:68: in test_blocks_after_limit
     assert check_rate_limit(email, is_anonymous=False) is False
@@ -41,11 +47,9 @@ tests\test_rate_limiter.py:122: in test_independent_limits
 E   AssertionError: assert True is False
 E    +  where True = check_rate_limit('alice@example.com', is_anonymous=False)
 =========================== short test summary info ===========================
-FAILED tests/test_i18n.py::TestI18nModule::test_get_language_default - Assert...
-FAILED tests/test_i18n.py::TestI18nModule::test_set_invalid_language - Assert...
 FAILED tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_blocks_after_limit
 FAILED tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_remaining_prompts
 FAILED tests/test_rate_limiter.py::TestAnonymousRateLimiting::test_blocks_after_one
 FAILED tests/test_rate_limiter.py::TestAnonymousRateLimiting::test_remaining_prompts_anonymous
 FAILED tests/test_rate_limiter.py::TestMultipleUsers::test_independent_limits
-7 failed, 58 passed in 0.97s
+========================= 5 failed, 9 passed in 0.56s =========================

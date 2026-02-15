@@ -1,0 +1,106 @@
+..............F.F..........FF.FF..F..............................        [100%]
+================================== FAILURES ===================================
+__________________ TestI18nModule.test_get_language_default ___________________
+
+self = <tests.test_i18n.TestI18nModule object at 0x0000014139CBF390>
+mock_streamlit = (<MagicMock name='st' id='1379668418176'>, {})
+
+    def test_get_language_default(self, mock_streamlit):
+        from utils.i18n import get_language
+>       assert get_language() == "en"
+E       AssertionError: assert 'id' == 'en'
+E         
+E         - en
+E         + id
+
+tests\test_i18n.py:82: AssertionError
+__________________ TestI18nModule.test_set_invalid_language ___________________
+
+self = <tests.test_i18n.TestI18nModule object at 0x0000014139C97BB0>
+mock_streamlit = (<MagicMock name='st' id='1379668416832'>, {})
+
+    def test_set_invalid_language(self, mock_streamlit):
+        _, mock_state = mock_streamlit
+        from utils.i18n import get_language, set_language
+        set_language("fr")  # Not supported
+>       assert get_language() == "en"  # Should stay default
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: assert 'id' == 'en'
+E         
+E         - en
+E         + id
+
+tests\test_i18n.py:94: AssertionError
+______________ TestLoggedInRateLimiting.test_blocks_after_limit _______________
+
+self = <tests.test_rate_limiter.TestLoggedInRateLimiting object at 0x000001413A923950>
+
+    def test_blocks_after_limit(self):
+        email = "user@example.com"
+        for _ in range(LOGGED_IN_DAILY_LIMIT):
+            increment_prompt_count(email)
+>       assert check_rate_limit(email, is_anonymous=False) is False
+E       AssertionError: assert True is False
+E        +  where True = check_rate_limit('user@example.com', is_anonymous=False)
+
+tests\test_rate_limiter.py:68: AssertionError
+_______________ TestLoggedInRateLimiting.test_remaining_prompts _______________
+
+self = <tests.test_rate_limiter.TestLoggedInRateLimiting object at 0x000001413A922C40>
+
+    def test_remaining_prompts(self):
+        email = "user@example.com"
+>       assert get_remaining_prompts(email, is_anonymous=False) == 5
+E       AssertionError: assert 9999 == 5
+E        +  where 9999 = get_remaining_prompts('user@example.com', is_anonymous=False)
+
+tests\test_rate_limiter.py:72: AssertionError
+_______________ TestAnonymousRateLimiting.test_blocks_after_one _______________
+
+self = <tests.test_rate_limiter.TestAnonymousRateLimiting object at 0x000001413A962C10>
+
+    def test_blocks_after_one(self):
+        session_id = "anon_abc123"
+        increment_prompt_count(session_id)
+>       assert check_rate_limit(session_id, is_anonymous=True) is False
+E       AssertionError: assert True is False
+E        +  where True = check_rate_limit('anon_abc123', is_anonymous=True)
+
+tests\test_rate_limiter.py:87: AssertionError
+_________ TestAnonymousRateLimiting.test_remaining_prompts_anonymous __________
+
+self = <tests.test_rate_limiter.TestAnonymousRateLimiting object at 0x000001413A923A80>
+
+    def test_remaining_prompts_anonymous(self):
+        session_id = "anon_xyz789"
+>       assert get_remaining_prompts(session_id, is_anonymous=True) == 1
+E       AssertionError: assert 9999 == 1
+E        +  where 9999 = get_remaining_prompts('anon_xyz789', is_anonymous=True)
+
+tests\test_rate_limiter.py:91: AssertionError
+__________________ TestMultipleUsers.test_independent_limits __________________
+
+self = <tests.test_rate_limiter.TestMultipleUsers object at 0x000001413A963110>
+
+    def test_independent_limits(self):
+        user_a = "alice@example.com"
+        user_b = "bob@example.com"
+    
+        for _ in range(LOGGED_IN_DAILY_LIMIT):
+            increment_prompt_count(user_a)
+    
+        # User A is blocked
+>       assert check_rate_limit(user_a, is_anonymous=False) is False
+E       AssertionError: assert True is False
+E        +  where True = check_rate_limit('alice@example.com', is_anonymous=False)
+
+tests\test_rate_limiter.py:122: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_i18n.py::TestI18nModule::test_get_language_default - Assert...
+FAILED tests/test_i18n.py::TestI18nModule::test_set_invalid_language - Assert...
+FAILED tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_blocks_after_limit
+FAILED tests/test_rate_limiter.py::TestLoggedInRateLimiting::test_remaining_prompts
+FAILED tests/test_rate_limiter.py::TestAnonymousRateLimiting::test_blocks_after_one
+FAILED tests/test_rate_limiter.py::TestAnonymousRateLimiting::test_remaining_prompts_anonymous
+FAILED tests/test_rate_limiter.py::TestMultipleUsers::test_independent_limits
+7 failed, 58 passed in 0.78s

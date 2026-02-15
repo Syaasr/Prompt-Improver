@@ -1,0 +1,11 @@
+{
+  "available_models": [
+    "llama3.1-8b",
+    "llama-3.3-70b",
+    "qwen-3-32b",
+    "qwen-3-235b-a22b-instruct-2507",
+    "gpt-oss-120b",
+    "zai-glm-4.7"
+  ],
+  "default_model": "llama3.1-8b"
+}

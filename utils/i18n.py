@@ -17,7 +17,7 @@ _TRANSLATIONS_FILE = os.path.join(
 _translations: dict | None = None
 
 SUPPORTED_LANGUAGES = {"en": "English", "id": "Bahasa Indonesia"}
-DEFAULT_LANGUAGE = "en"
+DEFAULT_LANGUAGE = "id"
 
 
 def _load_translations() -> dict:

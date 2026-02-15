@@ -118,7 +118,9 @@ def login_screen() -> bool:
 
 def is_guest_mode() -> bool:
     """Check if the user has opted for guest / anonymous mode."""
-    return st.session_state.get("guest_mode", False)
+    # DISABLED: Login requirement bypassed — always treat as guest
+    # return st.session_state.get("guest_mode", False)
+    return True
 
 
 def should_show_login_screen() -> bool:
@@ -129,4 +131,6 @@ def should_show_login_screen() -> bool:
       1. User is already logged in via Google, OR
       2. User has chosen guest mode in this session
     """
-    return not is_logged_in() and not is_guest_mode()
+    # DISABLED: Login screen bypassed — go straight to app
+    # return not is_logged_in() and not is_guest_mode()
+    return False

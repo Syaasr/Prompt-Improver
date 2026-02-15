@@ -1,2 +1,0 @@
-build_dir=D:\Coding\Website\Prompt-Improver\prompt_refiner_ui\frontend\dist
-exists=True

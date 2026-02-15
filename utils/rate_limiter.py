@@ -54,16 +54,18 @@ def _get_daily_limit(is_anonymous: bool) -> int:
 
 def check_rate_limit(user_id: str, is_anonymous: bool = False) -> bool:
     """Return True if the user is still under the daily limit."""
-    today = date.today().isoformat()
-    limits = load_rate_limits()
-    daily_limit = _get_daily_limit(is_anonymous)
-
-    if user_id not in limits:
-        return True
-    if today not in limits[user_id]:
-        return True
-
-    return limits[user_id][today] < daily_limit
+    # DISABLED: Rate limiting bypassed — always allow
+    return True
+    # today = date.today().isoformat()
+    # limits = load_rate_limits()
+    # daily_limit = _get_daily_limit(is_anonymous)
+    #
+    # if user_id not in limits:
+    #     return True
+    # if today not in limits[user_id]:
+    #     return True
+    #
+    # return limits[user_id][today] < daily_limit
 
 
 def increment_prompt_count(user_id: str) -> None:
@@ -82,16 +84,18 @@ def increment_prompt_count(user_id: str) -> None:
 
 def get_remaining_prompts(user_id: str, is_anonymous: bool = False) -> int:
     """Return the number of remaining prompts for today."""
-    today = date.today().isoformat()
-    limits = load_rate_limits()
-    daily_limit = _get_daily_limit(is_anonymous)
-
-    if user_id not in limits:
-        return daily_limit
-    if today not in limits[user_id]:
-        return daily_limit
-
-    return max(0, daily_limit - limits[user_id][today])
+    # DISABLED: Rate limiting bypassed — return unlimited
+    return 9999
+    # today = date.today().isoformat()
+    # limits = load_rate_limits()
+    # daily_limit = _get_daily_limit(is_anonymous)
+    #
+    # if user_id not in limits:
+    #     return daily_limit
+    # if today not in limits[user_id]:
+    #     return daily_limit
+    #
+    # return max(0, daily_limit - limits[user_id][today])
 
 
 def get_daily_limit(is_anonymous: bool = False) -> int:

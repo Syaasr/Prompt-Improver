@@ -2,7 +2,7 @@
 AI Engine — Cerebras Integration
 ==================================
 Core AI module for prompt analysis (interviewer) and refinement (refiner).
-Uses the Cerebras Cloud SDK with the llama-3.3-70b model.
+Uses the Cerebras Cloud SDK. Models and templates loaded from data/ folder.
 """
 
 import json
@@ -13,9 +13,28 @@ from cerebras.cloud.sdk import Cerebras
 
 from utils.security import validate_and_sanitize_user_input
 
-# ── Constants ───────────────────────────────────────────────────────
-MODEL = "llama-3.3-70b"
-PROMPTS_DIR = os.path.join(os.path.dirname(os.path.dirname(__file__)), "prompts")
+# ── Paths ───────────────────────────────────────────────────────────
+_BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+DATA_DIR = os.path.join(_BASE_DIR, "data")
+PROMPTS_DIR = os.path.join(_BASE_DIR, "prompts")
+
+# ── Load config from data/ ──────────────────────────────────────────
+def _load_json(filename: str) -> dict:
+    filepath = os.path.join(DATA_DIR, filename)
+    with open(filepath, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+_models_config = _load_json("models.json")
+AVAILABLE_MODELS: list[str] = _models_config["available_models"]
+DEFAULT_MODEL: str = _models_config["default_model"]
+
+_templates_config = _load_json("output_templates.json")
+OUTPUT_TEMPLATES: dict[str, dict] = _templates_config
+DEFAULT_TEMPLATE: str = list(_templates_config.keys())[0]  # First key
+
+QUESTION_COUNTS = [5, 7, 10]
+DEFAULT_QUESTION_COUNT = 5
 
 # ── Client singleton ───────────────────────────────────────────────
 _client: Cerebras | None = None
@@ -43,12 +62,16 @@ def _load_system_prompt(filename: str) -> str:
 
 
 # ── Interviewer ─────────────────────────────────────────────────────
-def analyze_prompt(raw_prompt: str) -> dict[str, Any]:
+def analyze_prompt(
+    raw_prompt: str,
+    model: str = DEFAULT_MODEL,
+    num_questions: int = DEFAULT_QUESTION_COUNT,
+) -> dict[str, Any]:
     """
     Send the user's raw prompt to the AI analyst.
 
-    The AI returns 3-5 clarifying questions as JSON:
-        {"questions": ["q1", "q2", "q3"]}
+    The AI returns clarifying questions as JSON:
+        {"questions": ["q1", "q2", ...]}
 
     Raises:
         ValueError: If input fails validation or AI returns invalid JSON.
@@ -59,16 +82,23 @@ def analyze_prompt(raw_prompt: str) -> dict[str, Any]:
         raise ValueError(error)
 
     system_instruction = _load_system_prompt("interviewer.txt")
+
+    # Override question count in the system prompt
+    system_instruction += (
+        f"\n\nIMPORTANT: Generate EXACTLY {num_questions} clarifying questions. "
+        f"Not more, not less. Return exactly {num_questions} items in the questions array."
+    )
+
     client = get_cerebras_client()
 
     response = client.chat.completions.create(
-        model=MODEL,
+        model=model,
         messages=[
             {"role": "system", "content": system_instruction},
             {"role": "user", "content": sanitized},
         ],
         temperature=0.7,
-        max_tokens=500,
+        max_tokens=800,
     )
 
     raw_text = response.choices[0].message.content.strip()
@@ -76,7 +106,6 @@ def analyze_prompt(raw_prompt: str) -> dict[str, Any]:
     # Parse JSON — handle possible markdown code fences
     cleaned = raw_text
     if cleaned.startswith("```"):
-        # Remove ```json ... ``` wrapper
         lines = cleaned.split("\n")
         lines = [l for l in lines if not l.strip().startswith("```")]
         cleaned = "\n".join(lines)
@@ -94,16 +123,16 @@ def analyze_prompt(raw_prompt: str) -> dict[str, Any]:
             "The AI returned an unexpected format. Please try again."
         )
 
-    if not (3 <= len(result["questions"]) <= 5):
-        raise ValueError(
-            "The AI returned an unexpected number of questions. Please try again."
-        )
-
     return result
 
 
 # ── Refiner ─────────────────────────────────────────────────────────
-def refine_prompt(raw_prompt: str, answers: dict[str, str]) -> str:
+def refine_prompt(
+    raw_prompt: str,
+    answers: dict[str, str],
+    model: str = DEFAULT_MODEL,
+    output_template: str = DEFAULT_TEMPLATE,
+) -> str:
     """
     Combine the raw prompt and user answers, then send to the AI refiner.
 
@@ -113,6 +142,17 @@ def refine_prompt(raw_prompt: str, answers: dict[str, str]) -> str:
         ValueError: If the AI fails to generate a refined prompt.
     """
     system_instruction = _load_system_prompt("refiner.txt")
+
+    # Inject the selected output template into the system prompt
+    template_data = OUTPUT_TEMPLATES.get(output_template, OUTPUT_TEMPLATES[DEFAULT_TEMPLATE])
+    template_structure = "\n".join(template_data["sections"])
+    system_instruction += (
+        f"\n\nIMPORTANT: You MUST format your refined prompt output using the "
+        f"'{output_template}' framework. Structure the output EXACTLY as follows:\n"
+        f"{template_structure}\n\n"
+        f"Fill in each section with content derived from the user's original prompt and their answers."
+    )
+
     client = get_cerebras_client()
 
     # Build the user message with context
@@ -127,7 +167,7 @@ def refine_prompt(raw_prompt: str, answers: dict[str, str]) -> str:
     )
 
     response = client.chat.completions.create(
-        model=MODEL,
+        model=model,
         messages=[
             {"role": "system", "content": system_instruction},
             {"role": "user", "content": user_message},

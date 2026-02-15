@@ -1,0 +1,49 @@
+{
+  "Objective-Driven Framework": {
+    "sections": [
+      "Role: Define the role or expertise you want the AI to assume.",
+      "Objective: Specify the main goal or outcome of your prompt.",
+      "Context: Provide all relevant background, scope, or situational details.",
+      "Inputs: List any data, examples, or references the AI should use.",
+      "Output Requirements: Describe the desired form, tone, and level of detail in the response.",
+      "Constraints: State any limitations such as length, format, or exclusions.",
+      "Evaluation: Mention how you will judge whether the AI's answer meets your needs."
+    ]
+  },
+  "Problem-Process-Product Framework": {
+    "sections": [
+      "Problem Definition: Clearly describe the issue, topic, or challenge.",
+      "Process Guidance: Indicate how the AI should reason, structure steps, or apply a method.",
+      "Product Specification: Identify the final deliverable (e.g., summary, strategy plan, analysis).",
+      "Supplementary Data: Include supporting details or examples.",
+      "Boundaries and Tools: Specify rules, tools, or resources to consider.",
+      "Tone and Audience: Define the communication style and target readership."
+    ]
+  },
+  "RICCE Method": {
+    "sections": [
+      "Role: Assign a professional identity or perspective to the AI.",
+      "Input: Declare the primary information or question for analysis.",
+      "Context: Outline surrounding factors such as purpose, domain, or scenario.",
+      "Constraints: Impose structure, limits, or excluded topics.",
+      "Expectations: Describe what a successful answer should achieve or contain."
+    ]
+  },
+  "APACE Model": {
+    "sections": [
+      "Aim: State the purpose or desired insight.",
+      "Plan: Detail how the AI should approach or organize its response.",
+      "Action: Indicate the specific tasks or sub-tasks to perform.",
+      "Check: Describe any accuracy checks, consistency rules, or validation criteria.",
+      "Enhance: Add stylistic preferences such as tone, level of formality, or creativity degree."
+    ]
+  },
+  "4D Prompt Architecture": {
+    "sections": [
+      "Define: Identify the topic, objective, and intended value of the prompt.",
+      "Detail: Supply relevant data, background information, or conditions.",
+      "Direct: Instruct the AI on reasoning style, structure, or operational steps.",
+      "Deliver: Specify the expected response format, deliverable type, and nuance."
+    ]
+  }
+}

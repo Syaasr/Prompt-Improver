@@ -21,8 +21,8 @@ def inject_custom_css():
 
         /* Accent Color Variables */
         :root {
-            --primary-orange: #F97316;
-            --primary-orange-hover: #EA580C;
+            --primary-orange: #FACC15;
+            --primary-orange-hover: #EAB308;
             --surface-dark: #1E293B;
             --bg-dark: #0F172A;
         }

@@ -9,8 +9,8 @@ from utils.ai_engine import (
     DEFAULT_MODEL,
     OUTPUT_TEMPLATES,
     DEFAULT_TEMPLATE,
-    QUESTION_COUNTS,
-    DEFAULT_QUESTION_COUNT,
+    QUESTION_TYPES,
+    DEFAULT_QUESTION_TYPE,
 )
 from utils.auth import (
     _auth_available,
@@ -101,13 +101,17 @@ with st.sidebar:
         sac.MenuItem('Settings', icon='gear', children=[
             sac.MenuItem(lang_label, icon='translate'),
         ]),
-    ], size='lg', color='orange', open_all=True)
+    ], size='lg', color='yellow', open_all=True)
 
     # Handle Sidebar Actions
     if selected_item and selected_item in _sidebar_templates:
-        st.session_state.raw_prompt = _sidebar_templates[selected_item]
-        st.session_state.step = "input"
-        st.rerun()
+        if st.session_state.get("last_selected_template") != selected_item:
+            st.session_state.raw_prompt = _sidebar_templates[selected_item]
+            # Force update of text_area widget by updating its key in session_state
+            st.session_state.input_prompt = _sidebar_templates[selected_item]
+            st.session_state.step = "input"
+            st.session_state.last_selected_template = selected_item
+            st.rerun()
     elif selected_item and selected_item.startswith('Bahasa'):
         new_lang = 'id' if current_lang == 'en' else 'en'
         set_language(new_lang)
@@ -119,7 +123,7 @@ left_col, main_col, right_col = st.columns([1, 6, 1])
 
 with main_col:
     # Header
-    st.markdown("<h2 style='margin-bottom: 0.5rem;'>Prompt <span style='color:#F97316'>Refiner</span></h2>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin-bottom: 0.5rem;'>Prompt <span style='color:#FACC15'>Refiner</span></h2>", unsafe_allow_html=True)
     st.markdown("<div style='margin-bottom: 0.75rem; color: #64748B;'>✦ Unlimited prompts — no login required.</div>", unsafe_allow_html=True)
 
     # Options Row: Model | Output Format | Questions
@@ -140,11 +144,11 @@ with main_col:
             key="selected_template",
         )
     with col_questions:
-        selected_q_count = st.selectbox(
-            "Jumlah Pertanyaan",
-            options=QUESTION_COUNTS,
-            index=QUESTION_COUNTS.index(DEFAULT_QUESTION_COUNT),
-            key="selected_q_count",
+        selected_q_type = st.selectbox(
+            "Question Type",
+            options=QUESTION_TYPES,
+            index=QUESTION_TYPES.index(DEFAULT_QUESTION_TYPE),
+            key="selected_q_type",
         )
     st.markdown("<div style='margin-bottom: 1rem;'></div>", unsafe_allow_html=True)
 
@@ -172,7 +176,7 @@ with main_col:
                             result = analyze_prompt(
                                 raw,
                                 model=selected_model,
-                                num_questions=selected_q_count,
+                                question_type=selected_q_type,
                             )
                             st.session_state.questions = result["questions"]
                             st.session_state.step = "questions"

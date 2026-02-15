@@ -79,21 +79,22 @@ class TestAnalyzePrompt:
         with pytest.raises(ValueError, match="unexpected format"):
             analyze_prompt("Write something")
 
-    def test_rejects_too_few_questions(self, mock_cerebras_client):
+    def test_accepts_question_type(self, mock_cerebras_client):
+        """Should accept question_type parameter and pass it to the AI."""
+        questions_json = json.dumps({
+            "questions": ["Q1?", "Q2?", "Q3?", "Q4?", "Q5?"]
+        })
         mock_cerebras_client.chat.completions.create.return_value = _make_response(
-            json.dumps({"questions": ["Only one?"]})
+            questions_json
         )
 
-        with pytest.raises(ValueError, match="unexpected number"):
-            analyze_prompt("Write something")
+        result = analyze_prompt("Write a blog post", question_type="Professional")
 
-    def test_rejects_too_many_questions(self, mock_cerebras_client):
-        mock_cerebras_client.chat.completions.create.return_value = _make_response(
-            json.dumps({"questions": [f"Q{i}?" for i in range(7)]})
-        )
-
-        with pytest.raises(ValueError, match="unexpected number"):
-            analyze_prompt("Write something")
+        assert len(result["questions"]) == 5
+        # Verify the system prompt includes the question type
+        call_args = mock_cerebras_client.chat.completions.create.call_args
+        system_msg = call_args.kwargs["messages"][0]["content"]
+        assert "Professional" in system_msg
 
     def test_validates_input(self):
         """Should reject inputs that fail security validation."""

@@ -33,8 +33,17 @@ _templates_config = _load_json("output_templates.json")
 OUTPUT_TEMPLATES: dict[str, dict] = _templates_config
 DEFAULT_TEMPLATE: str = list(_templates_config.keys())[0]  # First key
 
-QUESTION_COUNTS = [5, 7, 10]
-DEFAULT_QUESTION_COUNT = 5
+QUESTION_TYPES = ["General", "Detail", "Professional", "Technical", "Creative", "Academic"]
+DEFAULT_QUESTION_TYPE = "General"
+
+_QUESTION_TYPE_INSTRUCTIONS = {
+    "General": "Ask broad, open-ended clarifying questions suitable for any audience.",
+    "Detail": "Ask very specific, granular questions that drill deep into requirements, edge cases, and precise specifications.",
+    "Professional": "Ask formal, business-oriented questions focusing on stakeholders, deliverables, KPIs, and organizational context.",
+    "Technical": "Ask technically-focused questions about architecture, implementation details, tools, performance requirements, and technical constraints.",
+    "Creative": "Ask imaginative, exploratory questions about style, tone, mood, audience engagement, and creative vision.",
+    "Academic": "Ask scholarly questions about methodology, references, theoretical frameworks, evidence standards, and academic rigor.",
+}
 
 # ── Client singleton ───────────────────────────────────────────────
 _client: Cerebras | None = None
@@ -65,7 +74,7 @@ def _load_system_prompt(filename: str) -> str:
 def analyze_prompt(
     raw_prompt: str,
     model: str = DEFAULT_MODEL,
-    num_questions: int = DEFAULT_QUESTION_COUNT,
+    question_type: str = DEFAULT_QUESTION_TYPE,
 ) -> dict[str, Any]:
     """
     Send the user's raw prompt to the AI analyst.
@@ -83,10 +92,11 @@ def analyze_prompt(
 
     system_instruction = _load_system_prompt("interviewer.txt")
 
-    # Override question count in the system prompt
+    # Override question style in the system prompt based on selected type
+    type_instruction = _QUESTION_TYPE_INSTRUCTIONS.get(question_type, _QUESTION_TYPE_INSTRUCTIONS[DEFAULT_QUESTION_TYPE])
     system_instruction += (
-        f"\n\nIMPORTANT: Generate EXACTLY {num_questions} clarifying questions. "
-        f"Not more, not less. Return exactly {num_questions} items in the questions array."
+        f"\n\nIMPORTANT: Generate exactly 5 clarifying questions. "
+        f"Question style: '{question_type}'. {type_instruction}"
     )
 
     client = get_cerebras_client()

@@ -26,6 +26,7 @@ lib64/
 .local/
 
 # Streamlit
+.streamlit/
 .streamlit/secrets.toml
 .streamlit/config.toml
 

@@ -265,6 +265,7 @@ with main_col:
                                 raw,
                                 model=selected_model,
                                 question_type=selected_q_type,
+                                output_template=selected_template,
                             )
                             st.session_state.questions = result["questions"]
                             st.session_state.step = "questions"

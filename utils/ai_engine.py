@@ -61,7 +61,6 @@ def get_cerebras_client() -> Cerebras:
         if not api_key:
             raise ValueError(
                 "CEREBRAS_API_KEY not found. "
-                "Please set it in your .env file."
             )
         _client = Cerebras(api_key=api_key)
     return _client
@@ -79,6 +78,7 @@ def analyze_prompt(
     raw_prompt: str,
     model: str = DEFAULT_MODEL,
     question_type: str = DEFAULT_QUESTION_TYPE,
+    output_template: str = DEFAULT_TEMPLATE,
 ) -> dict[str, Any]:
     """
     Send the user's raw prompt to the AI analyst.
@@ -96,10 +96,18 @@ def analyze_prompt(
 
     system_instruction = _load_system_prompt("interviewer.txt")
 
+    # Inject the selected output template into the system prompt
+    template_data = OUTPUT_TEMPLATES.get(output_template, OUTPUT_TEMPLATES[DEFAULT_TEMPLATE])
+    template_structure = "\n".join(template_data["sections"])
+    
     # Override question style in the system prompt based on selected type
     type_instruction = _QUESTION_TYPE_INSTRUCTIONS.get(question_type, _QUESTION_TYPE_INSTRUCTIONS[DEFAULT_QUESTION_TYPE])
+    
     system_instruction += (
-        f"\n\nIMPORTANT: Generate exactly 5 clarifying questions. "
+        f"\n\nIMPORTANT: The user wants their final prompt to be in the '{output_template}' format.\n"
+        f"This format consists of the following sections:\n{template_structure}\n"
+        f"Your questions MUST help gather specific details to fill these sections.\n\n"
+        f"Generate exactly 5 clarifying questions. "
         f"Question style: '{question_type}'. {type_instruction}"
     )
 

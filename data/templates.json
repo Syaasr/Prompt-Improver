@@ -1,13 +1,18 @@
 {
-  "Coding - Optimize": {
-    "icon": "code-slash",
-    "en": "Optimize my code for better performance. Target language: [language]. Constraints: [e.g., memory, speed].",
-    "id": "Optimalkan kode saya untuk performa lebih baik. Bahasa target: [bahasa]. Batasan: [misal, memori, kecepatan]."
+  "None": {
+    "icon": "",
+    "en": "",
+    "id": ""
   },
   "Writing - Blog Post": {
     "icon": "pencil-square",
     "en": "Write a blog post about [topic]. Target audience: [audience]. Word count: [e.g., 800].",
     "id": "Tulis artikel blog tentang [topik]. Target pembaca: [audiens]. Jumlah kata: [misal, 800]."
+  },
+  "Coding - Optimize": {
+    "icon": "code-slash",
+    "en": "Optimize my code for better performance. Target language: [language]. Constraints: [e.g., memory, speed].",
+    "id": "Optimalkan kode saya untuk performa lebih baik. Bahasa target: [bahasa]. Batasan: [misal, memori, kecepatan]."
   },
   "Writing - Email": {
     "icon": "envelope",

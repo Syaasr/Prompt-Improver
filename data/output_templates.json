@@ -1,0 +1,105 @@
+{
+  "RTF (Role-Task-Format)": {
+    "description": "Tasks requiring specific expertise or perspective",
+    "sections": [
+      "Role: Define the role or expertise the AI should assume (e.g., 'You are a senior Python developer').",
+      "Task: Specify the exact task to be performed.",
+      "Format: Describe the desired output format, structure, or style."
+    ]
+  },
+  "Chain of Thought": {
+    "description": "Complex reasoning, debugging, mathematical problems, logic puzzles",
+    "sections": [
+      "Problem: Clearly state the problem or challenge to solve.",
+      "Step-by-step approach: Break the problem into sequential reasoning steps.",
+      "For each step, show: What you're checking, What you found, Why it matters.",
+      "Solution: Build toward and present the final solution with validation."
+    ]
+  },
+  "RISEN (Role-Instructions-Steps-End goal-Narrowing)": {
+    "description": "Multi-phase projects with clear deliverables and constraints",
+    "sections": [
+      "Role: Assign the expert identity.",
+      "Instructions: Define what needs to be done.",
+      "Steps: List the sequential actions to follow.",
+      "End goal: Describe the desired outcome or deliverable.",
+      "Narrowing: Specify constraints, focus areas, and limitations."
+    ]
+  },
+  "RODES (Role-Objective-Details-Examples-Sense check)": {
+    "description": "Complex design, system architecture, research proposals",
+    "sections": [
+      "Role: Define the expert perspective.",
+      "Objective: State what needs to be achieved.",
+      "Details: Provide all relevant context, requirements, and specifications.",
+      "Examples: Include concrete illustrations or sample outputs.",
+      "Sense check: Define validation criteria to verify the solution."
+    ]
+  },
+  "Chain of Density": {
+    "description": "Summarization, compression, synthesis of long content",
+    "sections": [
+      "Source Material: Identify the content to be compressed.",
+      "Iteration 1: Initial verbose summary capturing all key points.",
+      "Iteration 2: Compressed version preserving critical information.",
+      "Iteration 3: Further compressed to essential insights.",
+      "Iteration 4: Dense version with high information density per word.",
+      "Iteration 5: Maximum density — all critical points in minimal words."
+    ]
+  },
+  "RACE (Role-Audience-Context-Expectation)": {
+    "description": "Communication, presentations, stakeholder updates, storytelling",
+    "sections": [
+      "Role: Define the communicator identity.",
+      "Audience: Specify who is being addressed, their expertise level, and concerns.",
+      "Context: Provide the background situation.",
+      "Expectation: Describe what the audience needs to know or do."
+    ]
+  },
+  "RISE (Research-Investigate-Synthesize-Evaluate)": {
+    "description": "Analysis, investigation, systematic exploration, diagnostic work",
+    "sections": [
+      "Research: Gather relevant information and data sources.",
+      "Investigate: Deep dive into findings and identify patterns.",
+      "Synthesize: Combine insights into coherent themes.",
+      "Evaluate: Assess findings and recommend actions based on evidence."
+    ]
+  },
+  "STAR (Situation-Task-Action-Result)": {
+    "description": "Problem-solving with rich context, case studies, retrospectives",
+    "sections": [
+      "Situation: Describe the background context and environment.",
+      "Task: Define the specific challenge or objective.",
+      "Action: Detail what needs to be done.",
+      "Result: Specify the expected outcome or success criteria."
+    ]
+  },
+  "SOAP (Subjective-Objective-Assessment-Plan)": {
+    "description": "Structured documentation, technical logs, incident reports",
+    "sections": [
+      "Subjective: Reported information — symptoms, complaints, or observations.",
+      "Objective: Observable facts — metrics, data, measurable evidence.",
+      "Assessment: Analysis, diagnosis, and root cause identification.",
+      "Plan: Recommended actions, next steps, and remediation."
+    ]
+  },
+  "CLEAR (Collaborative-Limited-Emotional-Appreciable-Refinable)": {
+    "description": "Goal-setting, OKRs, measurable objectives, team alignment",
+    "sections": [
+      "Collaborative: Identify who is involved and their roles.",
+      "Limited: Define scope boundaries — time, resources, constraints.",
+      "Emotional: Explain why it matters — motivation and impact.",
+      "Appreciable: Specify measurable progress indicators.",
+      "Refinable: Describe how to iterate, review, and improve."
+    ]
+  },
+  "GROW (Goal-Reality-Options-Will)": {
+    "description": "Coaching, personal development, growth planning, mentorship",
+    "sections": [
+      "Goal: Define what needs to be achieved.",
+      "Reality: Assess the current situation — strengths and gaps.",
+      "Options: Explore possible approaches and alternatives.",
+      "Will: Commit to specific actions and timelines."
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+# Environment
+.env
+.env.*
+venv/
+.venv/
+env/
+.env/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+develop-eggs/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+share/python-wheels/
+lib/
+lib64/
+.local/
+
+# Streamlit
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# Data (runtime-generated / user data)
+data/rate_limits.json
+data/*.sqlite
+data/*.db
+!data/models.json
+!data/templates.json
+!data/translations.json
+!data/output_templates.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.project
+.pydevproject
+
+# OS
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Testing & QA
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# Agent / AI
+.Command/
+/Command/
+Command/
+.agent/

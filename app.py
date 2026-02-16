@@ -34,6 +34,16 @@ from utils.ui_config import inject_custom_css
 
 load_dotenv()
 
+hide_streamlit_style = """
+    <style>
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
+    header {visibility: hidden;}
+    </style>
+"""
+
+st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
 # ── Page Config ─────────────────────────────────────────────────────
 st.set_page_config(
     page_title="Prompt Refiner",

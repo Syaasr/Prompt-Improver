@@ -179,5 +179,19 @@ def inject_custom_css(theme: str = "dark"):
             border: 1px solid var(--border-color) !important;
         }}
 
+        /* ── Model Tag Badge ────────────────────────────── */
+        .model-tag {{
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            padding: 0.15rem 0.5rem;
+            border: 1.5px solid;
+            border-radius: 999px;
+            line-height: 1;
+            margin-top: -0.25rem;
+        }}
+
         </style>
     """, unsafe_allow_html=True)

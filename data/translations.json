@@ -65,11 +65,19 @@
     "settings_theme": "Theme",
     "settings_language": "Language",
     "theme_dark": "Dark",
-    "theme_light": "Light"
+    "theme_light": "Light",
+    "sidebar_usage_title": "How to Use",
+    "sidebar_usage_intro": "Follow these simple steps:",
+    "sidebar_usage_step1": "1. **Select Model**: Choose an AI model from the dropdown.",
+    "sidebar_usage_step2": "2. **Input Prompt**: Type your initial prompt in the text area.",
+    "sidebar_usage_step3": "3. **Analyze**: Click 'Analyze Prompt' to get clarifying questions.",
+    "sidebar_usage_step4": "4. **Answer**: Provide details for the questions.",
+    "sidebar_usage_step5": "5. **Refine**: Click 'Generate Refined Prompt' to get the result.",
+    "sidebar_creator_title": "Created By"
   },
   "id": {
     "app_title": "AI Prompt Refiner",
-    "app_subtitle": "Ubah prompt sederhana Anda menjadi instruksi yang kuat dan terstruktur.",
+    "app_subtitle": "Ubah prompt sederhana menjadi instruksi yang kuat dan terstruktur.",
     "sidebar_title": "🚀 Prompt Refiner",
     "sidebar_logged_in_as": "Masuk sebagai",
     "sidebar_guest_mode": "Mode Tamu",
@@ -133,6 +141,14 @@
     "settings_theme": "Tema",
     "settings_language": "Bahasa",
     "theme_dark": "Gelap",
-    "theme_light": "Terang"
+    "theme_light": "Terang",
+    "sidebar_usage_title": "Cara Penggunaan",
+    "sidebar_usage_intro": "Ikuti langkah mudah ini:",
+    "sidebar_usage_step1": "1. **Pilih Model**: Pilih model AI dari dropdown.",
+    "sidebar_usage_step2": "2. **Masukkan Prompt**: Ketik prompt awal Anda.",
+    "sidebar_usage_step3": "3. **Analisis**: Klik 'Analisis Prompt' untuk pertanyaan klarifikasi.",
+    "sidebar_usage_step4": "4. **Jawab**: Berikan detail untuk pertanyaan.",
+    "sidebar_usage_step5": "5. **Sempurnakan**: Klik tombol untuk mendapatkan hasil.",
+    "sidebar_creator_title": "Dibuat Oleh"
   }
 }

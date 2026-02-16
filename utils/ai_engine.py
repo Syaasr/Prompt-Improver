@@ -26,7 +26,11 @@ def _load_json(filename: str) -> dict:
 
 
 _models_config = _load_json("models.json")
-AVAILABLE_MODELS: list[str] = _models_config["available_models"]
+AVAILABLE_MODELS: list[str] = [m["id"] for m in _models_config["available_models"]]
+MODEL_TAGS: dict[str, dict] = {
+    m["id"]: {"label": m["label"], "tag": m["tag"], "tag_color": m["tag_color"]}
+    for m in _models_config["available_models"]
+}
 DEFAULT_MODEL: str = _models_config["default_model"]
 
 _templates_config = _load_json("output_templates.json")

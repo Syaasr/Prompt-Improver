@@ -30,58 +30,67 @@ Prompt Refiner adalah aplikasi berbasis AI yang membantu Anda meningkatkan kuali
 Ikuti langkah-langkah berikut untuk menjalankan aplikasi di komputer lokal Anda.
 
 ### Prasyarat
+
 - Python 3.10 atau lebih baru.
 - API Key dari [Cerebras Cloud](https://cloud.cerebras.net/).
 
 ### Langkah-langkah
 
-1.  **Clone Repository**
-    ```bash
-    git clone https://github.com/username/Prompt-Improver.git
-    cd Prompt-Improver
-    ```
+1. **Clone Repository**
 
-2.  **Buat Virtual Environment**
-    ```bash
-    python -m venv venv
-    # Windows
-    .\venv\Scripts\activate
-    # Mac/Linux
-    source venv/bin/activate
-    ```
+   ```bash
+   git clone https://github.com/username/Prompt-Improver.git
+   cd Prompt-Improver
+   ```
 
-3.  **Install Dependensi**
-    ```bash
-    pip install -r requirements.txt
-    ```
+2. **Buat Virtual Environment**
 
-4.  **Konfigurasi Environment**
-    Salin file `.env.example` menjadi `.env` dan masukkan API Key Anda.
-    ```bash
-    cp .env.example .env
-    ```
-    Edit file `.env`:
-    ```ini
-    CEREBRAS_API_KEY=your_api_key_here
-    ```
+   ```bash
+   python -m venv venv
+   # Windows
+   .\venv\Scripts\activate
+   # Mac/Linux
+   source venv/bin/activate
+   ```
 
-5.  **Jalankan Aplikasi**
-    ```bash
-    streamlit run app.py
-    ```
+3. **Install Dependensi**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Konfigurasi Environment**
+
+   Salin file `.env.example` menjadi `.env` dan masukkan API Key Anda.
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Edit file `.env`:
+
+   ```ini
+   CEREBRAS_API_KEY=your_api_key_here
+   ```
+
+5. **Jalankan Aplikasi**
+
+   ```bash
+   streamlit run app.py
+   ```
 
 ## Cara Penggunaan
 
-1.  **Pilih Template (Opsional)**: Buka sidebar bagian "Template" dan pilih kasus penggunaan (misal: *Coding - Optimize*).
-2.  **Input Prompt**: Masukkan ide awal Anda di kotak teks utama.
-3.  **Analisis**: Klik tombol **Analisis Prompt**. AI akan memberikan beberapa pertanyaan klarifikasi.
-4.  **Jawab Pertanyaan**: Berikan konteks tambahan dengan menjawab pertanyaan yang muncul.
-5.  **Generate**: Klik **Refine Prompt**.
-6.  **Hasil**: Salin prompt yang sudah dioptimalkan dan gunakan di ChatGPT, Claude, atau model lainnya.
+1. **Pilih Template (Opsional)**: Buka sidebar bagian "Template" dan pilih kasus penggunaan (misal: *Coding - Optimize*).
+2. **Input Prompt**: Masukkan ide awal Anda di kotak teks utama.
+3. **Analisis**: Klik tombol **Analisis Prompt**. AI akan memberikan beberapa pertanyaan klarifikasi.
+4. **Jawab Pertanyaan**: Berikan konteks tambahan dengan menjawab pertanyaan yang muncul.
+5. **Generate**: Klik **Refine Prompt**.
+6. **Hasil**: Salin prompt yang sudah dioptimalkan dan gunakan di ChatGPT, Claude, atau model lainnya.
 
 ## Struktur Proyek
 
-```
+```text
 Prompt-Improver/
 ├── .agent/             # Konfigurasi agen AI
 ├── .streamlit/         # Konfigurasi tema Streamlit

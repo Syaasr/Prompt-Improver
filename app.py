@@ -1,3 +1,5 @@
+import json
+import os
 import streamlit as st
 import streamlit_antd_components as sac
 from dotenv import load_dotenv
@@ -81,7 +83,6 @@ user_id, is_anon = get_user_identifier()
 remaining = get_remaining_prompts(user_id, is_anon)
 
 # ── Load sidebar templates from data/ ───────────────────────────────
-import json, os
 _templates_file = os.path.join(os.path.dirname(__file__), "data", "templates.json")
 with open(_templates_file, "r", encoding="utf-8") as f:
     _sidebar_templates = json.load(f)
@@ -285,11 +286,11 @@ with main_col:
             st.markdown("---")
             c1, c2 = st.columns([1, 1])
             with c1:
-                if st.form_submit_button(f"← {t('step2_back_button')}"):
+                if st.form_submit_button(t("step2_back_button")):
                     st.session_state.step = "input"
                     st.rerun()
             with c2:
-                if st.form_submit_button(f"{t('step2_generate_button')} →", type="primary"):
+                if st.form_submit_button(t("step2_generate_button"), type="primary"):
                     st.session_state.answers = answers
                     with st.spinner(t("spinner_refining")):
                         try:

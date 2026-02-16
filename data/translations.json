@@ -40,10 +40,12 @@
     "step2_empty_answer": "Please answer all questions before continuing.",
 
     "step3_title": "✅ Your Refined Prompt",
+    "step3_success": "Prompt Refined Successfully!",
     "step3_label": "Refined Prompt",
     "step3_copy_button": "📋 Copy",
     "step3_download_button": "📥 Download .txt",
     "step3_start_over_button": "🔄 Start Over",
+    "step3_restart": "Start Over",
     "step3_copied_toast": "Copied to clipboard!",
 
     "spinner_analyzing": "Analyzing your prompt...",
@@ -116,10 +118,12 @@
     "step2_empty_answer": "Silakan jawab semua pertanyaan sebelum melanjutkan.",
 
     "step3_title": "✅ Prompt Anda yang Disempurnakan",
+    "step3_success": "Prompt Berhasil Disempurnakan!",
     "step3_label": "Prompt yang Disempurnakan",
     "step3_copy_button": "📋 Salin",
     "step3_download_button": "📥 Unduh .txt",
     "step3_start_over_button": "🔄 Mulai Ulang",
+    "step3_restart": "Mulai Ulang",
     "step3_copied_toast": "Disalin ke clipboard!",
 
     "spinner_analyzing": "Menganalisis prompt Anda...",

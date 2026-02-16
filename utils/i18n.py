@@ -45,7 +45,7 @@ def t(key: str) -> str:
     """
     Translate a key to the current language.
 
-    Falls back to English if the key is missing in the selected language,
+    Falls back to Indonesian if the key is missing in the selected language,
     and returns the key itself if not found at all.
     """
     translations = _load_translations()
@@ -55,7 +55,7 @@ def t(key: str) -> str:
     if lang in translations and key in translations[lang]:
         return translations[lang][key]
 
-    # Fallback to English
+    # Fallback to Indonesian (default language)
     if DEFAULT_LANGUAGE in translations and key in translations[DEFAULT_LANGUAGE]:
         return translations[DEFAULT_LANGUAGE][key]
 

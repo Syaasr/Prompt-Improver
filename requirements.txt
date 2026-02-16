@@ -1,4 +1,5 @@
 streamlit>=1.42.0
+streamlit-antd-components
 cerebras-cloud-sdk
 Authlib>=1.3.2
 python-dotenv

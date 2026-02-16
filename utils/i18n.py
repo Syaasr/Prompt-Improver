@@ -55,7 +55,7 @@ def t(key: str) -> str:
     if lang in translations and key in translations[lang]:
         return translations[lang][key]
 
-    # Fallback to English
+    # Fallback to default language (Indonesian)
     if DEFAULT_LANGUAGE in translations and key in translations[DEFAULT_LANGUAGE]:
         return translations[DEFAULT_LANGUAGE][key]
 

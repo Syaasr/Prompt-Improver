@@ -23,14 +23,14 @@ def load_rate_limits() -> dict:
     """Load rate limit data from the JSON file."""
     if not os.path.exists(RATE_LIMIT_FILE):
         return {}
-    with open(RATE_LIMIT_FILE, "r") as f:
+    with open(RATE_LIMIT_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
 
 def save_rate_limits(limits: dict) -> None:
     """Persist rate limit data to the JSON file."""
     os.makedirs("data", exist_ok=True)
-    with open(RATE_LIMIT_FILE, "w") as f:
+    with open(RATE_LIMIT_FILE, "w", encoding="utf-8") as f:
         json.dump(limits, f, indent=2)
 
 

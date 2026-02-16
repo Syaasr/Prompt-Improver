@@ -92,7 +92,6 @@ Ikuti langkah-langkah berikut untuk menjalankan aplikasi di komputer lokal Anda.
 
 ```text
 Prompt-Improver/
-├── .agent/             # Konfigurasi agen AI
 ├── .streamlit/         # Konfigurasi tema Streamlit
 ├── Command/            # Dokumentasi & panduan
 ├── data/               # File konfigurasi JSON (models, templates, translations)

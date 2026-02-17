@@ -37,11 +37,12 @@ _templates_config = _load_json("output_templates.json")
 OUTPUT_TEMPLATES: dict[str, dict] = _templates_config
 DEFAULT_TEMPLATE: str = list(_templates_config.keys())[0]  # First key
 
-QUESTION_TYPES = ["General", "Detail", "Professional", "Technical", "Creative", "Academic"]
+QUESTION_TYPES = ["General", "Short", "Detail", "Professional", "Technical", "Creative", "Academic"]
 DEFAULT_QUESTION_TYPE = "General"
 
 _QUESTION_TYPE_INSTRUCTIONS = {
     "General": "Ask broad, open-ended clarifying questions suitable for any audience.",
+    "Short": "Ask very short, concise questions that can be answered in a few words.",
     "Detail": "Ask very specific, granular questions that drill deep into requirements, edge cases, and precise specifications.",
     "Professional": "Ask formal, business-oriented questions focusing on stakeholders, deliverables, KPIs, and organizational context.",
     "Technical": "Ask technically-focused questions about architecture, implementation details, tools, performance requirements, and technical constraints.",

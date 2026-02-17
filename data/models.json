@@ -1,22 +1,10 @@
 {
   "available_models": [
     {
-      "id": "llama-3.3-70b",
-      "label": "Llama 3.3 70B",
-      "tag": "default",
-      "tag_color": "#94A3B8"
-    },
-    {
       "id": "llama3.1-8b",
       "label": "Llama 3.1 8B",
       "tag": "fast",
       "tag_color": "#22C55E"
-    },
-    {
-      "id": "qwen-3-32b",
-      "label": "Qwen 3 32B",
-      "tag": "recommended",
-      "tag_color": "#FACC15"
     },
     {
       "id": "gpt-oss-120b",
@@ -25,5 +13,5 @@
       "tag_color": "#A78BFA"
     }
   ],
-  "default_model": "llama-3.3-70b"
+  "default_model": "llama3.1-8b"
 }

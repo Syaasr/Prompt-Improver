@@ -91,7 +91,7 @@ with open(_templates_file, "r", encoding="utf-8") as f:
 
 with st.sidebar:
     # 1. Header
-    st.markdown(f"<div style='margin-bottom: 0.5rem; font-weight:700; font-size:1.2rem;'>Prompt <span style='color:#FACC15'>Refiner</span></div>", unsafe_allow_html=True)
+    st.markdown(f"<div style='margin-bottom: 0.5rem; font-weight:700; font-size:1.2rem;'>Prompt <span style='color:#FACC15'>Improver</span></div>", unsafe_allow_html=True)
     st.markdown(f"<div style='margin-bottom: 2rem; color: #94A3B8; font-size:0.85rem;'>{t('app_subtitle')}</div>", unsafe_allow_html=True)
 
     # 2. How to Use (Dropdown)
@@ -119,7 +119,7 @@ with st.sidebar:
                 "code": "💻",
                 "stars": "✨",
                 "book": "📖",
-                "cpu": "🤖",
+                "robot-arm": "🦾",
                 "chat-text": "💬",
                 "gear": "⚙️", 
                 "card-text": "📝",
@@ -129,7 +129,10 @@ with st.sidebar:
                 "journal-code": "📓",
                 "braces": "{}",
                 "diagram-3": "🕸️",
-                "window": "🪟"
+                "window": "🪟",
+                "pencil-square": "✏️",
+                "none": "❌",
+                "robot": "🤖"
             }.get(icon_name, "📄")
 
         # Create options map
@@ -204,8 +207,8 @@ left_col, main_col, right_col = st.columns([1, 6, 1])
 
 with main_col:
     # Header
-    st.markdown("<h2 style='margin-bottom: 0.5rem;'>Prompt <span style='color:#FACC15'>Refiner</span></h2>", unsafe_allow_html=True)
-    st.markdown("<div style='margin-bottom: 0.75rem; color: #64748B;'>✦ Unlimited prompts — no login required.</div>", unsafe_allow_html=True)
+    st.markdown("<h2 style='margin-bottom: 0.5rem;'>Prompt <span style='color:#FACC15'>Improver</span></h2>", unsafe_allow_html=True)
+    st.markdown("<div style='margin-bottom: 0.75rem; color: #64748B;'>✦ Make your prompts better — no login required.</div>", unsafe_allow_html=True)
 
     # Options Row: Model | Output Format | Question Type
     col_model, col_template, col_questions = st.columns(3)
@@ -285,7 +288,7 @@ with main_col:
                 answers[q] = st.text_input(f"answer_{i}", label_visibility="collapsed", placeholder=t("step2_answer_help"))
             
             st.markdown("---")
-            c1, c2 = st.columns([1, 1])
+            c1, c2 = st.columns([2, 1])
             with c1:
                 if st.form_submit_button(t("step2_back_button")):
                     st.session_state.step = "input"

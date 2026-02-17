@@ -1,0 +1,35 @@
+{
+  "available_models": [
+    {
+      "id": "llama-3.3-70b",
+      "label": "Llama 3.3 70B",
+      "tag": "default",
+      "tag_color": "#94A3B8"
+    },
+    {
+      "id": "llama3.1-8b",
+      "label": "Llama 3.1 8B",
+      "tag": "fast",
+      "tag_color": "#22C55E"
+    },
+    {
+      "id": "qwen-3-235b-a22b-instruct-2507",
+      "label": "Qwen 3 235B",
+      "tag": "recommended",
+      "tag_color": "#FACC15"
+    },
+    {
+      "id": "gpt-oss-120b",
+      "label": "GPT-OSS 120B",
+      "tag": "pro",
+      "tag_color": "#A78BFA"
+    },
+    {
+      "id": "zai-glm-4.7",
+      "label": "Zai-GLM 4.7",
+      "tag": "smart",
+      "tag_color": "#A78BFA"
+    }
+  ],
+  "default_model": "llama-3.3-70b"
+}

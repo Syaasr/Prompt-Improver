@@ -1,6 +1,6 @@
 {
   "None": {
-    "icon": "",
+    "icon": "none",
     "en": "",
     "id": ""
   },
@@ -10,7 +10,7 @@
     "id": "Tulis artikel blog tentang [topik]. Target pembaca: [audiens]. Jumlah kata: [misal, 800]."
   },
   "Coding - Optimize": {
-    "icon": "code-slash",
+    "icon": "code",
     "en": "Optimize my code for better performance. Target language: [language]. Constraints: [e.g., memory, speed].",
     "id": "Optimalkan kode saya untuk performa lebih baik. Bahasa target: [bahasa]. Batasan: [misal, memori, kecepatan]."
   },
@@ -34,8 +34,8 @@
     "en": "Create 5 optimized prompts for generating [content type] about [topic]. Include variations for [styles, e.g., detailed/concise].",
     "id": "Buat 5 prompt yang dioptimalkan untuk menghasilkan [jenis konten] tentang [topik]. Sertakan variasi untuk [gaya, misal, detail/ringkas]."
   },
-  "Robotics - Code Snippet": {
-    "icon": "cpu",
+  "Robotics - Code": {
+    "icon": "robot-arm",
     "en": "Generate Arduino/C++ code for [robot task, e.g., servo control with Dynamixel]. Hardware: [e.g., ESP32]. Features: [list].",
     "id": "Buat kode Arduino/C++ untuk [tugas robot, misal, kontrol servo dengan Dynamixel]. Hardware: [misal, ESP32]. Fitur: [daftar]."
   },

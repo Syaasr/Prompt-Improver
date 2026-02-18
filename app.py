@@ -315,6 +315,10 @@ with main_col:
         st.success(t("step3_success") if t("step3_success") != "step3_success" else "Prompt Refined Successfully!")
         st.markdown(f"### {t('step3_title') if t('step3_title') != 'step3_title' else 'Final Prompt'}")
         st.code(st.session_state.refined_prompt, language="markdown")
+
+        # ── Token Savings Tip (Indonesian only) ──
+        if get_language() == "id":
+            st.info(t("step3_tip_english_tokens"))
         
         if st.button(t("step3_restart") if t("step3_restart") != "step3_restart" else "Start Over"):
             st.session_state.step = "input"

@@ -124,6 +124,7 @@
     "step3_download_button": "📥 Unduh .txt",
     "step3_start_over_button": "🔄 Mulai Ulang",
     "step3_restart": "Mulai Ulang",
+    "step3_tip_english_tokens": "💡 **Tips:** Prompt dalam bahasa Inggris menggunakan lebih sedikit token dibanding bahasa Indonesia. Terjemahkan prompt ini ke bahasa Inggris untuk menghemat penggunaan token saat digunakan di ChatGPT, Gemini, atau model AI lainnya.",
     "step3_copied_toast": "Disalin ke clipboard!",
 
     "spinner_analyzing": "Menganalisis prompt Anda...",
